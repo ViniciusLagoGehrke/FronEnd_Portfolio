@@ -1,17 +1,30 @@
 import { nanoid } from 'nanoid';
+import { useEffect } from 'react';
+import api from '../services/api';
+
+const userName = "ViniciusLagoGehrke"
+const keyWord = "OnPortfolio"
+
+useEffect(() => {
+  api.get(`repositories?q=${keyWord}+in:readme+user:${userName}`)
+    .then(res => {
+      setAvatar(res.items[0].owner.avatar_url)
+      setRepos(res.items)
+    });
+}, []);
 
 // HEAD DATA
 export const headData = {
-  title: '', // e.g: 'Name | Developer'
-  lang: '', // e.g: en, es, fr, jp
-  description: '', // e.g: Welcome to my website
+  title: 'V. Gehrke', // e.g: 'Name | Developer'
+  lang: 'en', // e.g: en, es, fr, jp
+  description: 'Portfolio powered by Gatsby and GitHub API', // e.g: Welcome to my website
 };
 
 // HERO DATA
 export const heroData = {
   title: '',
-  name: '',
-  subtitle: '',
+  name: 'Vinicius Gehrke',
+  subtitle: 'I\'m a Front End Developer based in Porto, Portugal.',
   cta: '',
 };
 
